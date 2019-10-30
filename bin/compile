@@ -74,7 +74,7 @@ then
 	wget -c http://ftp.gnu.org/gnu/artanis/artanis-$ARTANIS_VERSION.tar.bz2           && \
 		tar xvjf artanis-$ARTANIS_VERSION.tar.bz2                                       && \
 		rm -f artanis-$ARTANIS_VERSION.tar.bz2                                          && \
-		cd artanis-$ARTANIS_VERSION && ./configure --prefix=$BUILD_DIR/.apt/usr && make
+		cd artanis-$ARTANIS_VERSION && ./configure --prefix=$BUILD_DIR/.apt/usr GUILE_EFFECTIVE_VERSION=2.2 GUILE="$BUILD_DIR/.apt/usr/bin/guile" GUILD="$BUILD_DIR/.apt/usr/bin/guild" GUILE_CONFIG="$BUILD_DIR/.apt/usr/bin/guile-config" GUILE_TOOLS="$BUILD_DIR/.apt/usr/bin/guile-tools" && make
 else
 	cd artanis-$ARTANIS_VERSION
 fi
