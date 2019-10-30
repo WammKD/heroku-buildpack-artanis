@@ -1,0 +1,6 @@
+#!/bin/sh
+
+# I should probably do a check to see if guile exists but we can do that later
+echo "Artanis"
+
+exit 0
