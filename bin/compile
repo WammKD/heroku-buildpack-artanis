@@ -62,8 +62,11 @@ export | grep -E -e ' (PATH|LD_LIBRARY_PATH|LIBRARY_PATH|INCLUDE_PATH|CPATH|CPPP
 
 
 
-topic "PKG path"
-echo $PKG_CONFIG_PATH | indent
+topic "Guile pkg-config"
+echo $BUILD_DIR | indent
+cat $BUILD_DIR/.apt/usr/lib/pkgconfig/guile-2.2.pc
+
+cp $BUILD_DIR/.apt/usr/lib/pkgconfig/guile-2.2.pc $BUILD_DIR/.apt/usr/lib/pkgconfig/guile.pc
 
 mkdir -p $BUILDS_CACHE_DIR && cd $BUILDS_CACHE_DIR
 
