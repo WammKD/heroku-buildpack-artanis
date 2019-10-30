@@ -1,0 +1,79 @@
+#!/usr/bin/env bash
+# bin/compile <build-dir> <cache-dir>
+
+# fail fast
+#set -e
+
+# debug
+set -ex
+
+# parse and derive params
+LP_DIR=`cd $(dirname $0); cd ..; pwd`
+BUILD_DIR=$1
+CACHE_DIR=$2
+ARTANIS_VERSION=0.4
+
+function indent() {
+	c='s/^/       /'
+
+	case $(uname) in
+		Darwin)
+			sed -l "$c"
+			;;
+		*)
+			sed -u "$c"
+			;;
+	esac
+}
+
+function topic() {
+	echo "-----> $*"
+}
+
+
+
+BUILDS_CACHE_DIR="$CACHE_DIR/artanis-builds"
+
+# Store which STACK we are running on in the cache to bust the cache if it changes
+if [ -f $CACHE_DIR/.apt/STACK ]; then
+	CACHED_STACK=$(cat "$CACHE_DIR/.apt/STACK")
+else
+	CACHED_STACK=$STACK
+fi
+
+if
+	[[ $CACHED_STACK == $STACK ]]
+then
+	# STACK has not changed
+	topic "Reusing cache"
+else
+	# STACK changed
+	topic "Detected Stack changes, flushing cache"
+
+	rm -rf $BUILDS_CACHE_DIR
+fi
+
+
+
+mkdir -p $BUILD_DIR/.apt
+
+#give environment to later buildpacks
+export | grep -E -e ' (PATH|LD_LIBRARY_PATH|LIBRARY_PATH|INCLUDE_PATH|CPATH|CPPPATH|PKG_CONFIG_PATH|GUILE_LOAD_PATH)=' > "$LP_DIR/export"
+
+
+
+mkdir -p $BUILDS_CACHE_DIR && cd $BUILDS_CACHE_DIR
+
+topic "Installing Artanis"
+if
+	[ ! -d "$BUILDS_CACHE_DIR/artanis-$ARTANIS_VERSION" ]
+then
+	wget -c http://ftp.gnu.org/gnu/artanis/artanis-$ARTANIS_VERSION.tar.bz2           && \
+		tar xvjf artanis-$ARTANIS_VERSION.tar.bz2                                       && \
+		rm -f artanis-$ARTANIS_VERSION.tar.bz2                                          && \
+		cd artanis-$ARTANIS_VERSION && ./configure --prefix=$BUILD_DIR/.apt/usr && make
+else
+	cd artanis-$ARTANIS_VERSION
+fi
+
+make install && cd ..
