@@ -62,6 +62,9 @@ export | grep -E -e ' (PATH|LD_LIBRARY_PATH|LIBRARY_PATH|INCLUDE_PATH|CPATH|CPPP
 
 
 
+topic "PKG path"
+echo $PKG_CONFIG_PATH | indent
+
 mkdir -p $BUILDS_CACHE_DIR && cd $BUILDS_CACHE_DIR
 
 topic "Installing Artanis"
