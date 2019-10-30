@@ -62,12 +62,6 @@ export | grep -E -e ' (PATH|LD_LIBRARY_PATH|LIBRARY_PATH|INCLUDE_PATH|CPATH|CPPP
 
 
 
-topic "Guile pkg-config"
-echo $BUILD_DIR | indent
-cat $BUILD_DIR/.apt/usr/lib/pkgconfig/guile-2.2.pc
-
-cp $BUILD_DIR/.apt/usr/lib/pkgconfig/guile-2.2.pc $BUILD_DIR/.apt/usr/lib/pkgconfig/guile.pc
-
 mkdir -p $BUILDS_CACHE_DIR && cd $BUILDS_CACHE_DIR
 
 topic "Installing Artanis"
@@ -76,10 +70,7 @@ if
 then
 	wget -c http://ftp.gnu.org/gnu/artanis/artanis-$ARTANIS_VERSION.tar.bz2           && \
 		tar xvjf artanis-$ARTANIS_VERSION.tar.bz2                                       && \
-		rm -f artanis-$ARTANIS_VERSION.tar.bz2                                          && \
-		cd artanis-$ARTANIS_VERSION && ./configure --prefix=$BUILD_DIR/.apt/usr && make
-else
-	cd artanis-$ARTANIS_VERSION
+		rm -f artanis-$ARTANIS_VERSION.tar.bz2
 fi
 
-make install && cd ..
+cd artanis-$ARTANIS_VERSION && ./configure --prefix=$BUILD_DIR/.apt/usr && make && make install && cd ..
