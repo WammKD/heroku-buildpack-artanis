@@ -2,10 +2,10 @@
 # bin/compile <build-dir> <cache-dir>
 
 # fail fast
-#set -e
+set -e
 
 # debug
-set -ex
+#set -ex
 
 # parse and derive params
 LP_DIR=`cd $(dirname $0); cd ..; pwd`
@@ -51,4 +51,4 @@ wget -c http://ftp.gnu.org/gnu/artanis/artanis-$ARTANIS_VERSION.tar.bz2  && \
 mkdir -p $BUILD_DIR/.apt/usr/lib/guile/2.2/site-ccache
 mv $BUILD_DIR/.apt$BUILD_DIR/.apt/usr/lib/guile/2.2/site-ccache/artanis $BUILD_DIR/.apt/usr/lib/guile/2.2/site-ccache/
 
-rsync -av --remove-source-files $BUILD_DIR/.apt$BUILD_DIR/.apt/usr/share/guile/ $BUILD_DIR/.apt/usr/share/guile/
+rsync -av --remove-source-files $BUILD_DIR/.apt$BUILD_DIR/.apt/usr/share/guile/ $BUILD_DIR/.apt/usr/share/guile/ | indent
