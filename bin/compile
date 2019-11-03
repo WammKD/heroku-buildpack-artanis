@@ -48,5 +48,7 @@ wget -c http://ftp.gnu.org/gnu/artanis/artanis-$ARTANIS_VERSION.tar.bz2  && \
 	cd artanis-$ARTANIS_VERSION                                            && \
 	./configure && make && make install DESTDIR="$BUILD_DIR/.apt" && cd ..
 
-topic "Search"
-find $BUILD_DIR -iname artanis | indent
+mkdir -p $BUILD_DIR/.apt/usr/lib/guile/2.2/site-ccache
+mv $BUILD_DIR/.apt$BUILD_DIR/.apt/usr/lib/guile/2.2/site-ccache/artanis $BUILD_DIR/.apt/usr/lib/guile/2.2/site-ccache/
+
+rsync -av --remove-source-files $BUILD_DIR/.apt$BUILD_DIR/.apt/usr/share/guile/ $BUILD_DIR/.apt/usr/share/guile/
