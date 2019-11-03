@@ -32,29 +32,6 @@ function topic() {
 
 
 
-BUILDS_CACHE_DIR="$CACHE_DIR/artanis-builds"
-
-# Store which STACK we are running on in the cache to bust the cache if it changes
-if [ -f $CACHE_DIR/.apt/STACK ]; then
-	CACHED_STACK=$(cat "$CACHE_DIR/.apt/STACK")
-else
-	CACHED_STACK=$STACK
-fi
-
-if
-	[[ $CACHED_STACK == $STACK ]]
-then
-	# STACK has not changed
-	topic "Reusing cache"
-else
-	# STACK changed
-	topic "Detected Stack changes, flushing cache"
-
-	rm -rf $BUILDS_CACHE_DIR
-fi
-
-
-
 mkdir -p $BUILD_DIR/.apt
 
 #give environment to later buildpacks
@@ -62,7 +39,7 @@ export | grep -E -e ' (PATH|LD_LIBRARY_PATH|LIBRARY_PATH|INCLUDE_PATH|CPATH|CPPP
 
 
 
-mkdir -p $BUILDS_CACHE_DIR && cd $BUILDS_CACHE_DIR
+cd /tmp
 
 topic "Installing Artanis"
 if
