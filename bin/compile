@@ -42,8 +42,8 @@ export | grep -E -e ' (PATH|LD_LIBRARY_PATH|LIBRARY_PATH|INCLUDE_PATH|CPATH|CPPP
 cd /tmp
 
 topic "Installing Artanis"
-wget -c http://ftp.gnu.org/gnu/artanis/artanis-$ARTANIS_VERSION.tar.bz2           && \
-	tar xvjf artanis-$ARTANIS_VERSION.tar.bz2                                       && \
-	rm -f artanis-$ARTANIS_VERSION.tar.bz2                                          && \
-	cd artanis-$ARTANIS_VERSION                                                     && \
-	./configure --prefix=$BUILD_DIR/.apt/usr && make && make install DESTDIR="$BUILD_DIR/.apt" && cd ..
+wget -c http://ftp.gnu.org/gnu/artanis/artanis-$ARTANIS_VERSION.tar.bz2  && \
+	tar xvjf artanis-$ARTANIS_VERSION.tar.bz2                              && \
+	rm -f artanis-$ARTANIS_VERSION.tar.bz2                                 && \
+	cd artanis-$ARTANIS_VERSION                                            && \
+	./configure && make && make install DESTDIR="$BUILD_DIR/.apt" && cd ..
