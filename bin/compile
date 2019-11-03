@@ -47,3 +47,6 @@ wget -c http://ftp.gnu.org/gnu/artanis/artanis-$ARTANIS_VERSION.tar.bz2  && \
 	rm -f artanis-$ARTANIS_VERSION.tar.bz2                                 && \
 	cd artanis-$ARTANIS_VERSION                                            && \
 	./configure && make && make install DESTDIR="$BUILD_DIR/.apt" && cd ..
+
+topic "Search"
+find $BUILD_DIR -iname artanis | indent
