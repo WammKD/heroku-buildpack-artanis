@@ -55,6 +55,6 @@ rsync -av --remove-source-files $BUILD_DIR/.apt$BUILD_DIR/.apt/usr/share/guile/ 
 
 sed -i 's,#! .\+/\.apt/usr/bin/guile,#! '"$HOME"'/\.apt/usr/bin/guile,g' $BUILD_DIR/.apt/bin/art
 
-touch $BUILD_DIR/tmp
-touch $BUILD_DIR/tmp/cache
-touch $BUILD_DIR/tmp/cache/migration
+mkdir -p $BUILD_DIR/tmp
+mkdir -p $BUILD_DIR/tmp/cache
+mkdir -p $BUILD_DIR/tmp/cache/migration
