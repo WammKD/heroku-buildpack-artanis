@@ -1,6 +1,13 @@
 #!/bin/sh
 
 # I should probably do a check to see if guile exists but we can do that later
-echo "Artanis"
+# this pack is valid for apps with an ENTRY file for Artanis
+if
+	[ -f $1/ENTRY ]
+then
+	echo "Artanis"
 
-exit 0
+	exit 0
+else
+	exit 1
+fi
