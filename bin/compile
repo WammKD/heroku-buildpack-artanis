@@ -11,7 +11,7 @@ set -e
 LP_DIR=`cd $(dirname $0); cd ..; pwd`
 BUILD_DIR=$1
 CACHE_DIR=$2
-ARTANIS_VERSION=0.4
+ARTANIS_VERSION=0.4.1
 
 function indent() {
 	c='s/^/       /'
