@@ -49,11 +49,11 @@ wget -c http://ftp.gnu.org/gnu/artanis/artanis-$ARTANIS_VERSION.tar.bz2  && \
 	./configure && make && make install DESTDIR="$BUILD_DIR/.apt" && cd ..
 
 mkdir -p $BUILD_DIR/.apt/usr/lib/guile/3.0/site-ccache
-mv $BUILD_DIR/.apt$BUILD_DIR/.apt/usr/lib/guile/3.0/site-ccache/artanis $BUILD_DIR/.apt/usr/lib/guile/3.0/site-ccache/
+# mv $BUILD_DIR/.apt$BUILD_DIR/.apt/usr/lib/guile/3.0/site-ccache/artanis $BUILD_DIR/.apt/usr/lib/guile/3.0/site-ccache/
 
-rsync -av --remove-source-files $BUILD_DIR/.apt$BUILD_DIR/.apt/usr/share/guile/ $BUILD_DIR/.apt/usr/share/guile/ | indent
+# rsync -av --remove-source-files $BUILD_DIR/.apt$BUILD_DIR/.apt/usr/share/guile/ $BUILD_DIR/.apt/usr/share/guile/ | indent
 
-sed -i 's,#! .\+/\.apt/usr/bin/guile,#! '"$HOME"'/\.apt/usr/bin/guile,g' $BUILD_DIR/.apt/bin/art
+# sed -i 's,#! .\+/\.apt/usr/bin/guile,#! '"$HOME"'/\.apt/usr/bin/guile,g' $BUILD_DIR/.apt/bin/art
 
 mkdir -p $BUILD_DIR/tmp
 mkdir -p $BUILD_DIR/tmp/cache
