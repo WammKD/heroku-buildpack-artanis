@@ -7,6 +7,9 @@ set -e
 # debug
 #set -ex
 
+# to use the pattern matching with rm
+shopt -s extglob
+
 # parse and derive params
 LP_DIR=`cd $(dirname $0); cd ..; pwd`
 BUILD_DIR=$1
