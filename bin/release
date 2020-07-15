@@ -2,4 +2,6 @@
 
 cat <<EOF
 ---
+default_process_types:
+	web: art work -p $PORT
 EOF
