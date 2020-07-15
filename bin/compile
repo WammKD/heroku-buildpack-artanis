@@ -65,6 +65,8 @@ then
 
 	cp -r $BUILD_DIR/.apt/*          $CACHE_DIR/.apt
 else
+	rm -r $BUILD_DIR/.apt/usr/lib/gcc/x86_64-linux-gnu/*
+
 	cp -r $CACHE_DIR/.apt/!("STACK") $BUILD_DIR/.apt
 fi
 
