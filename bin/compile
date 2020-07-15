@@ -62,6 +62,8 @@ then
 	rsync -av --remove-source-files $BUILD_DIR/.apt$BUILD_DIR/.apt/usr/share/guile/ $BUILD_DIR/.apt/usr/share/guile/ | indent
 
 	sed -i 's,#! .\+/\.apt/usr/bin/guile,#! '"$HOME"'/\.apt/usr/bin/guile,g' $BUILD_DIR/.apt/bin/art
+
+	cp -r $BUILD_DIR/.apt/*          $CACHE_DIR/.apt
 else
 	cp -r $CACHE_DIR/.apt/!("STACK") $BUILD_DIR/.apt
 fi
