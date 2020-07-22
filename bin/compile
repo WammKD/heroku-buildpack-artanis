@@ -42,33 +42,25 @@ export | grep -E -e ' (PATH|LD_LIBRARY_PATH|LIBRARY_PATH|INCLUDE_PATH|CPATH|CPPP
 
 
 
-if
-	[ -f $CACHE_DIR/.apt/bin/art ]
-then
-	cd /tmp
+cd /tmp
 
-	topic "Installing Artanis"
-	# wget -c http://ftp.gnu.org/gnu/artanis/artanis-$ARTANIS_VERSION.tar.bz2  && \
-		# 	tar xvjf artanis-$ARTANIS_VERSION.tar.bz2                              && \
-		# 	rm -f artanis-$ARTANIS_VERSION.tar.bz2                                 && \
-		# 	cd artanis-$ARTANIS_VERSION                                            && \
-		# 	./configure && make && make install DESTDIR="$BUILD_DIR/.apt" && cd ..
-	git clone https://gitlab.com/NalaGinrut/artanis && \
-		cd artanis && ./autogen.sh && ./configure && make && make install DESTDIR="$BUILD_DIR/.apt" && cd ..
+topic "Installing Artanis"
+# wget -c http://ftp.gnu.org/gnu/artanis/artanis-$ARTANIS_VERSION.tar.bz2  && \
+	# 	tar xvjf artanis-$ARTANIS_VERSION.tar.bz2                              && \
+	# 	rm -f artanis-$ARTANIS_VERSION.tar.bz2                                 && \
+	# 	cd artanis-$ARTANIS_VERSION                                            && \
+	# 	./configure && make && make install DESTDIR="$BUILD_DIR/.apt" && cd ..
+git clone https://gitlab.com/NalaGinrut/artanis && \
+	cd artanis && ./autogen.sh && ./configure && make && make install DESTDIR="$BUILD_DIR/.apt" && cd ..
 
-	mkdir -p $BUILD_DIR/.apt/usr/lib/guile/3.0/site-ccache
-	mv $BUILD_DIR/.apt$BUILD_DIR/.apt/usr/lib/guile/3.0/site-ccache/artanis $BUILD_DIR/.apt/usr/lib/guile/3.0/site-ccache/
+mkdir -p $BUILD_DIR/.apt/usr/lib/guile/3.0/site-ccache
+mv $BUILD_DIR/.apt$BUILD_DIR/.apt/usr/lib/guile/3.0/site-ccache/artanis $BUILD_DIR/.apt/usr/lib/guile/3.0/site-ccache/
 
-	rsync -av --remove-source-files $BUILD_DIR/.apt$BUILD_DIR/.apt/usr/share/guile/ $BUILD_DIR/.apt/usr/share/guile/ | indent
+rsync -av --remove-source-files $BUILD_DIR/.apt$BUILD_DIR/.apt/usr/share/guile/ $BUILD_DIR/.apt/usr/share/guile/ | indent
 
-	sed -i 's,#! .\+/\.apt/usr/bin/guile,#! '"$HOME"'/\.apt/usr/bin/guile,g' $BUILD_DIR/.apt/bin/art
+sed -i 's,#! .\+/\.apt/usr/bin/guile,#! '"$HOME"'/\.apt/usr/bin/guile,g' $BUILD_DIR/.apt/bin/art
 
-	cp -r $BUILD_DIR/.apt/*          $CACHE_DIR/.apt
-else
-	rm -r $BUILD_DIR/.apt/usr/lib/gcc/x86_64-linux-gnu/*
-
-	cp -r $CACHE_DIR/.apt/!("STACK") $BUILD_DIR/.apt
-fi
+cp -r $BUILD_DIR/.apt/*          $CACHE_DIR/.apt
 
 mkdir -p $BUILD_DIR/tmp
 mkdir -p $BUILD_DIR/tmp/cache
