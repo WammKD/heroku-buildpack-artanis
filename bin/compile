@@ -43,7 +43,7 @@ export | grep -E -e ' (PATH|LD_LIBRARY_PATH|LIBRARY_PATH|INCLUDE_PATH|CPATH|CPPP
 
 
 if
-	[ -f $CACHE_DIR/.apt/bin/art ]
+	[ ! -f $CACHE_DIR/.apt/bin/art ]
 then
 	cd /tmp
 
